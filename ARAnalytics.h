@@ -59,6 +59,7 @@
 + (void)setupFlurryWithAPIKey:(NSString *)key;
 + (void)setupGoogleAnalyticsWithID:(NSString *)identifier;
 + (void)setupFirebaseAnalytics;
++ (void)setupFirebaseAnalyticsWithGoogleAppID:(NSString *)googleAppID;
 + (void)setupLocalyticsWithAppKey:(NSString *)key;
 + (void)setupKISSMetricsWithAPIKey:(NSString *)key;
 + (void)setupCrittercismWithAppID:(NSString *)appID;

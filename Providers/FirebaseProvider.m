@@ -12,7 +12,18 @@
     if ((self = [super init])) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            [FIRApp configure];
+            if (identifier == nil) {
+                [FIRApp configure];
+            } else {
+                FIROptions *options = [[FIROptions alloc] initWithGoogleAppID:identifier GCMSenderID:@""];
+                [options setProjectID:@"none"];
+                [options setAPIKey:@"none"];
+                @try {
+                    [FIRApp configureWithOptions:options];
+                } @catch (NSException *exception) {
+                }
+                
+            }
         });
     }
 
@@ -45,8 +56,9 @@
 
 - (void)didShowNewPageView:(NSString *)pageTitle withProperties:(NSDictionary *)properties {
 
-    // Firebase Analytics does not offer a functionality for page views, so they are tracked as events
-    [self event:pageTitle withProperties:properties];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+       [FIRAnalytics setScreenName:pageTitle screenClass:nil];
+    });
 }
 
 #endif
