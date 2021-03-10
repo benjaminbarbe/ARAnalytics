@@ -13,7 +13,7 @@
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             if (identifier == nil) {
-                [FIRApp configure];
+                // [FIRApp configure];
             } else {
                 FIROptions *options = [[FIROptions alloc] initWithGoogleAppID:identifier GCMSenderID:@""];
                 [options setProjectID:@"none"];
