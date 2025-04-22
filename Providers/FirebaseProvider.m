@@ -57,7 +57,11 @@
 - (void)didShowNewPageView:(NSString *)pageTitle withProperties:(NSDictionary *)properties {
 
     dispatch_sync(dispatch_get_main_queue(), ^{
-       [FIRAnalytics setScreenName:pageTitle screenClass:nil];
+        [FIRAnalytics logEventWithName:kFIREventScreenView
+                             parameters:@{
+                                 kFIRParameterScreenName: pageTitle ?: @"",
+                                 kFIRParameterScreenClass: @""
+                             }];
     });
 }
 
